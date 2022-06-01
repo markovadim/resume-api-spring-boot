@@ -5,14 +5,16 @@ import by.markov.resumeapispringboot.repository.ResumeRepository;
 import by.markov.resumeapispringboot.entity.Resume;
 import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
 
     @Autowired
-    private ResumeRepository resumeRepository;
+    private final ResumeRepository resumeRepository;
 
     public Iterable<Resume> showResumeList() throws Exception {
         Iterable<Resume> resumeIterable = resumeRepository.findAll();
