@@ -3,7 +3,7 @@ package by.markov.resumeapispringboot.controller;
 import by.markov.resumeapispringboot.entity.Resume;
 import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
-import by.markov.resumeapispringboot.service.ResumeService;
+import by.markov.resumeapispringboot.service.ResumeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class ResumeController {
 
     @Autowired
-    private ResumeService resumeService;
+    private ResumeServiceImpl resumeService;
 
     @GetMapping("/list")
     public ResponseEntity showAllResumes() {
