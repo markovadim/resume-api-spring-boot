@@ -4,18 +4,18 @@ import by.markov.resumeapispringboot.entity.Resume;
 import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 import by.markov.resumeapispringboot.service.ResumeServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/resumes")
+@RequestMapping("/resume")
+@RequiredArgsConstructor
 public class ResumeController {
 
-    @Autowired
-    private ResumeServiceImpl resumeService;
+    private final ResumeServiceImpl resumeService;
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity showAllResumes() {
         try {
             return ResponseEntity.ok(resumeService.showResumeList());
@@ -25,7 +25,7 @@ public class ResumeController {
     }
 
     @PostMapping
-    public ResponseEntity addResume(@RequestBody Resume resume) {
+    public ResponseEntity createResume(@RequestBody Resume resume) {
         try {
             resumeService.additionResume(resume);
             return ResponseEntity.ok("Resume was saved");
@@ -33,17 +33,6 @@ public class ResumeController {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error.");
-        }
-    }
-
-    @GetMapping
-    public ResponseEntity getResume(@RequestParam Integer id) {
-        try {
-            return ResponseEntity.ok(resumeService.getResume(id));
-        } catch (ResumeNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -62,6 +51,28 @@ public class ResumeController {
     public ResponseEntity updateResume(@PathVariable Integer id, @RequestBody Resume resume) {
         try {
             return ResponseEntity.ok(resumeService.updateResume(id, resume));
+        } catch (ResumeNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/id")
+    public ResponseEntity findResumeById(@RequestParam Integer id) {
+        try {
+            return ResponseEntity.ok(resumeService.findResumeById(id));
+        } catch (ResumeNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity findResumeByUser(@RequestParam String user) {
+        try {
+            return ResponseEntity.ok(resumeService.findResumeByUser(user));
         } catch (ResumeNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {

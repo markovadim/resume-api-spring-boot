@@ -6,14 +6,14 @@ import by.markov.resumeapispringboot.entity.Resume;
 import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
 
-    @Autowired
     private final ResumeRepository resumeRepository;
 
     public Iterable<Resume> showResumeList() throws Exception {
@@ -27,15 +27,23 @@ public class ResumeServiceImpl implements ResumeService {
 
     public void additionResume(Resume resume) throws ResumeAlreadyExistException {
         if (resumeRepository.findResumeByUser(resume.getUser()) != null) {
-            throw new ResumeAlreadyExistException("Resume with name: " + resume.getUser() + " already exist.");
+            throw new ResumeAlreadyExistException();
         }
         resumeRepository.save(resume);
     }
 
-    public Resume getResume(Integer id) throws ResumeNotFoundException {
+    public Resume findResumeById(Integer id) throws ResumeNotFoundException {
         Resume resume = resumeRepository.findById(id).get();
         if (resume == null) {
-            throw new ResumeNotFoundException("Resume with id:" + id + " was not found");
+            throw new ResumeNotFoundException();
+        }
+        return resume;
+    }
+
+    public Resume findResumeByUser(String user) throws ResumeNotFoundException {
+        Resume resume = resumeRepository.findResumeByUser(user);
+        if (resume == null) {
+            throw new ResumeNotFoundException();
         }
         return resume;
     }
@@ -43,7 +51,7 @@ public class ResumeServiceImpl implements ResumeService {
     public Resume deleteResume(Integer id) throws ResumeNotFoundException {
         Resume resume = resumeRepository.findById(id).get();
         if (resume == null) {
-            throw new ResumeNotFoundException("Resume with id:" + id + " was not found");
+            throw new ResumeNotFoundException();
         } else {
             resumeRepository.delete(resume);
         }
@@ -53,7 +61,7 @@ public class ResumeServiceImpl implements ResumeService {
     public Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException {
         Resume resumeInDataBase = resumeRepository.findById(id).get();
         if (resumeInDataBase == null) {
-            throw new ResumeNotFoundException("Resume with id:" + newResume.getId() + " was not found");
+            throw new ResumeNotFoundException();
         } else {
             resumeInDataBase.setUser(newResume.getUser());
             resumeInDataBase.setLocation(newResume.getLocation());
@@ -62,5 +70,15 @@ public class ResumeServiceImpl implements ResumeService {
             resumeRepository.save(resumeInDataBase);
         }
         return resumeInDataBase;
+    }
+
+    public List<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience) {
+        List<Resume> resumes = resumeRepository.findResumeByLocationContainsOrContactsContainsOrExperienceContains(location, contacts, experience);
+        return resumes;
+    }
+
+    public List<Resume> findResumeByLocationContainsAndContactsContainsAndExperienceContains(String location, String contacts, String experience) {
+        List<Resume> resumes = resumeRepository.findResumeByLocationContainsAndContactsContainsAndExperienceContains(location, contacts, experience);
+        return resumes;
     }
 }
