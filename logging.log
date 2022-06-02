@@ -1,0 +1,26 @@
+2022-06-03 01:21:37.530  INFO 10896 --- [main] b.m.r.ResumeApiSpringBootApplication     : Starting ResumeApiSpringBootApplication using Java 11.0.14 on DESKTOP-FA7S5G1 with PID 10896 (C:\Users\DELL\IdeaProjects\resume-api-spring-boot\resume-api-spring-boot\build\classes\java\main started by DELL in C:\Users\DELL\IdeaProjects\resume-api-spring-boot)
+2022-06-03 01:21:37.532  INFO 10896 --- [main] b.m.r.ResumeApiSpringBootApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 01:21:38.139  INFO 10896 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-03 01:21:38.185  INFO 10896 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interfaces.
+2022-06-03 01:21:38.590  INFO 10896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-06-03 01:21:38.600  INFO 10896 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-06-03 01:21:38.600  INFO 10896 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+2022-06-03 01:21:38.724  INFO 10896 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-06-03 01:21:38.725  INFO 10896 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1157 ms
+2022-06-03 01:21:38.894  INFO 10896 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-06-03 01:21:38.945  INFO 10896 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2022-06-03 01:21:39.089  INFO 10896 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-06-03 01:21:39.201  INFO 10896 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-06-03 01:21:39.592  INFO 10896 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-06-03 01:21:39.614  INFO 10896 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-06-03 01:21:40.256  INFO 10896 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-06-03 01:21:40.264  INFO 10896 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-03 01:21:40.546  WARN 10896 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-06-03 01:21:40.831  INFO 10896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-06-03 01:21:40.839  INFO 10896 --- [main] b.m.r.ResumeApiSpringBootApplication     : Started ResumeApiSpringBootApplication in 3.832 seconds (JVM running for 4.919)
+2022-06-03 01:21:51.782  INFO 10896 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-06-03 01:21:51.784  INFO 10896 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-06-03 01:21:51.786  INFO 10896 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-06-03 01:21:58.873  INFO 10896 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-06-03 01:21:58.876  INFO 10896 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-06-03 01:21:58.885  INFO 10896 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
