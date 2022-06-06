@@ -10,6 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation service interface
+ *
+ * @author markov_vadim
+ */
+
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
@@ -74,11 +80,6 @@ public class ResumeServiceImpl implements ResumeService {
 
     public List<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience) {
         List<Resume> resumes = resumeRepository.findResumeByLocationContainsOrContactsContainsOrExperienceContains(location, contacts, experience);
-        return resumes;
-    }
-
-    public List<Resume> findResumeByLocationContainsAndContactsContainsAndExperienceContains(String location, String contacts, String experience) {
-        List<Resume> resumes = resumeRepository.findResumeByLocationContainsAndContactsContainsAndExperienceContains(location, contacts, experience);
         return resumes;
     }
 }

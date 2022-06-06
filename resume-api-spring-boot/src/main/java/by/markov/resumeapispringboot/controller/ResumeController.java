@@ -10,6 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Main controller for CRUD resume
+ *
+ * @author markov_vadim
+ */
+
 @RestController
 @RequestMapping("/resume")
 @RequiredArgsConstructor
@@ -28,6 +34,13 @@ public class ResumeController {
         }
     }
 
+    /**
+     * Create new resume
+     *
+     * @param resume - main object with fields (location, experience, contacts)
+     * @see Resume
+     */
+
     @PostMapping
     public void createResume(@RequestBody Resume resume) {
         try {
@@ -40,8 +53,14 @@ public class ResumeController {
         }
     }
 
+    /**
+     * Remove resume by id
+     *
+     * @param id - id in database
+     * @return deleted resume
+     */
     @DeleteMapping("/{id}")
-    public Resume deleteResumeById(@PathVariable Integer id) throws ResumeNotFoundException {
+    public Resume deleteResumeById(@PathVariable Integer id) {
         Resume resume = null;
         try {
             resume = resumeService.deleteResume(id);
@@ -55,6 +74,15 @@ public class ResumeController {
         return resume;
     }
 
+    /**
+     * Update resume
+     *
+     * @param id        - id in database
+     * @param newResume - resume with new field (fields)
+     * @return update resume (if id is right)
+     * @throws ResumeNotFoundException (if id not found)
+     * @see ResumeNotFoundException
+     */
     @PutMapping("/{id}")
     public Resume updateResume(@PathVariable Integer id, @RequestBody Resume newResume) throws ResumeNotFoundException {
         Resume resume = null;
@@ -70,6 +98,14 @@ public class ResumeController {
         return resume;
     }
 
+    /**
+     * Search resume by id
+     *
+     * @param id - id in database
+     * @return resume (if id was found)
+     * @throws ResumeNotFoundException (if id not found)
+     * @see ResumeNotFoundException
+     */
     @GetMapping("/id/{id}")
     public Resume findResumeById(@PathVariable Integer id) throws ResumeNotFoundException {
         Resume resume = null;
@@ -86,6 +122,14 @@ public class ResumeController {
         return resume;
     }
 
+    /**
+     * Search resume by username
+     *
+     * @param user - username
+     * @return resume (if name was found)
+     * @throws ResumeNotFoundException (if name not found)
+     * @see ResumeNotFoundException
+     */
     @GetMapping("/user/{user}")
     public Resume findResumeByUser(@PathVariable String user) throws ResumeNotFoundException {
         Resume resume = null;

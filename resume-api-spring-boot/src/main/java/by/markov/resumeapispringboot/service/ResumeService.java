@@ -6,6 +6,13 @@ import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 
 import java.util.List;
 
+/**
+ * Application service for CRUD operations
+ *
+ * @author markov_vadim
+ * @see ResumeServiceImpl - implemetnation this service
+ */
+
 public interface ResumeService {
     Iterable<Resume> showResumeList() throws Exception;
 
@@ -20,6 +27,4 @@ public interface ResumeService {
     Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException;
 
     List<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience);
-
-    List<Resume> findResumeByLocationContainsAndContactsContainsAndExperienceContains(String location, String contacts, String experience);
 }

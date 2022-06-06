@@ -1,7 +1,6 @@
 package by.markov.resumeapispringboot.controller;
 
 import by.markov.resumeapispringboot.entity.Resume;
-import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 import by.markov.resumeapispringboot.service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -14,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller for search resume with another fields
+ *
+ * @author markov_vadim
+ */
+
 @RestController
 @RequestMapping("/search")
 @RequiredArgsConstructor
@@ -22,6 +27,15 @@ public class ResumeSearchController {
     private final ResumeService resumeService;
 
     private static final Logger logger = LoggerFactory.getLogger(ResumeSearchController.class);
+
+    /**
+     * Search resume with location, experience or contacts
+     *
+     * @param location   - location of employee
+     * @param contacts   - contacts of employee
+     * @param experience - experience
+     * @return - resume list
+     */
 
     @GetMapping("/")
     public List findResumeByFieldOrField(@RequestParam(required = false) String location,
