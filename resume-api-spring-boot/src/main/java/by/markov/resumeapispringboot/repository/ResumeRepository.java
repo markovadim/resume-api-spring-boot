@@ -1,9 +1,9 @@
 package by.markov.resumeapispringboot.repository;
 
 import by.markov.resumeapispringboot.entity.Resume;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 /**
  * DAO level for work with main object
@@ -14,5 +14,7 @@ import java.util.List;
 public interface ResumeRepository extends CrudRepository<Resume, Integer> {
     Resume findResumeByUser(String user);
 
-    List<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience);
+    Page<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience, Pageable pageable);
+
+    Page<Resume> findAll(Pageable pageable);
 }

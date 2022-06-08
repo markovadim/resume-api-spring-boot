@@ -7,6 +7,9 @@ import by.markov.resumeapispringboot.service.ResumeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +29,15 @@ public class ResumeController {
     private static final Logger logger = LoggerFactory.getLogger(ResumeController.class);
 
     @GetMapping
-    public ResponseEntity showAllResumes() {
+    public Page<Resume> showAllResumes(@PageableDefault(size = 5) Pageable pageable) {
+        Page<Resume> resumePage = null;
         try {
-            return ResponseEntity.ok(resumeService.showResumeList());
+            resumePage = resumeService.showResumeList(pageable);
+            ResponseEntity.ok(resumePage);
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            ResponseEntity.ok(e.getMessage());
         }
+        return resumePage;
     }
 
     /**
@@ -84,7 +90,7 @@ public class ResumeController {
      * @see ResumeNotFoundException
      */
     @PutMapping("/{id}")
-    public Resume updateResume(@PathVariable Integer id, @RequestBody Resume newResume) throws ResumeNotFoundException {
+    public Resume updateResume(@PathVariable Integer id, @RequestBody Resume newResume) {
         Resume resume = null;
         try {
             resume = resumeService.updateResume(id, newResume);
@@ -107,7 +113,7 @@ public class ResumeController {
      * @see ResumeNotFoundException
      */
     @GetMapping("/id/{id}")
-    public Resume findResumeById(@PathVariable Integer id) throws ResumeNotFoundException {
+    public Resume findResumeById(@PathVariable Integer id) {
         Resume resume = null;
         try {
             resume = resumeService.findResumeById(id);
@@ -131,7 +137,7 @@ public class ResumeController {
      * @see ResumeNotFoundException
      */
     @GetMapping("/user/{user}")
-    public Resume findResumeByUser(@PathVariable String user) throws ResumeNotFoundException {
+    public Resume findResumeByUser(@PathVariable String user) {
         Resume resume = null;
         try {
             resume = resumeService.findResumeByUser(user);

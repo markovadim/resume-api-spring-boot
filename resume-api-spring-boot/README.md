@@ -5,6 +5,8 @@ ____
 >[GET] http://localhost:8080/resume
 >>Example:
 ![image](https://user-images.githubusercontent.com/86801437/172254013-f749f828-7421-467c-bfd5-44b352038635.png)
+With page parameter:
+![image](https://user-images.githubusercontent.com/86801437/172717447-aa0a97ea-124a-4d53-a324-e5b4b4cdb023.png)
 
 
 ### Create new resume (PUT method): ###  

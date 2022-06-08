@@ -3,8 +3,8 @@ package by.markov.resumeapispringboot.service;
 import by.markov.resumeapispringboot.entity.Resume;
 import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Application service for CRUD operations
@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public interface ResumeService {
-    Iterable<Resume> showResumeList() throws Exception;
+    Page<Resume> showResumeList(Pageable pageable) throws Exception;
 
     void additionResume(Resume resume) throws ResumeAlreadyExistException;
 
@@ -26,5 +26,5 @@ public interface ResumeService {
 
     Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException;
 
-    List<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience);
+    Page<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience, Pageable pageable);
 }

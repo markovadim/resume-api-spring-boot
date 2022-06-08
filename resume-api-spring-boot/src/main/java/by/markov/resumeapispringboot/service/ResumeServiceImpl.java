@@ -6,9 +6,9 @@ import by.markov.resumeapispringboot.entity.Resume;
 import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Implementation service interface
@@ -22,8 +22,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     private final ResumeRepository resumeRepository;
 
-    public Iterable<Resume> showResumeList() throws Exception {
-        Iterable<Resume> resumeIterable = resumeRepository.findAll();
+    public Page<Resume> showResumeList(Pageable pageable) throws Exception {
+        Page<Resume> resumeIterable = resumeRepository.findAll(pageable);
         if (!resumeIterable.iterator().hasNext()) {
             throw new Exception("Resume list is empty");
         } else {
@@ -78,8 +78,7 @@ public class ResumeServiceImpl implements ResumeService {
         return resumeInDataBase;
     }
 
-    public List<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience) {
-        List<Resume> resumes = resumeRepository.findResumeByLocationContainsOrContactsContainsOrExperienceContains(location, contacts, experience);
-        return resumes;
+    public Page<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience, Pageable pageable) {
+        return resumeRepository.findResumeByLocationContainsOrContactsContainsOrExperienceContains(location, contacts, experience, pageable);
     }
 }
