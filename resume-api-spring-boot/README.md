@@ -2,7 +2,7 @@
 ____
 
 ### Show all resumes (GET method): ###
->[GET] http://localhost:8080/resume
+>[GET] http://localhost:8080/resume/
 >>Example:
 ![image](https://user-images.githubusercontent.com/86801437/172254013-f749f828-7421-467c-bfd5-44b352038635.png)
 With page parameter:
@@ -35,6 +35,6 @@ With page parameter:
 ![image](https://user-images.githubusercontent.com/86801437/172620008-88a4a198-c79d-4590-8af2-7a5b7ce7627d.png)
 
 ### Find resume by another fields (GET method): ###  
->GET http://localhost:8080/search/
+>[GET] http://localhost:8080/resume
 >>Example (with @RequestParam ):
-![image](https://user-images.githubusercontent.com/86801437/172620642-0dff97c8-916e-43b5-a192-b7ceccca78f0.png)
+![image](https://user-images.githubusercontent.com/86801437/173088304-af0e46e9-fcaf-413f-9775-cbb60587f931.png)
