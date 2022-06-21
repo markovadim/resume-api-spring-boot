@@ -29,14 +29,16 @@ public class ResumeController {
 
     private static final Logger logger = LoggerFactory.getLogger(ResumeController.class);
 
+    private Resume resume;
+
     @GetMapping("/")
     public Page<Resume> showAllResumes(@PageableDefault(size = 5) Pageable pageable) {
         Page<Resume> resumePage = null;
         try {
             resumePage = resumeService.showResumeList(pageable);
             ResponseEntity.ok(resumePage);
-        } catch (Exception e) {
-            ResponseEntity.ok(e.getMessage());
+        } catch (ResumeNotFoundException e) {
+            ResponseEntity.badRequest().body(e.getMessage());
         }
         return resumePage;
     }
@@ -55,8 +57,6 @@ public class ResumeController {
             ResponseEntity.ok("Resume was saved");
         } catch (ResumeAlreadyExistException e) {
             ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body("Error.");
         }
     }
 
@@ -67,18 +67,14 @@ public class ResumeController {
      * @return deleted resume
      */
     @DeleteMapping("/{id}")
-    public Resume deleteResumeById(@PathVariable Integer id) {
-        Resume resume = null;
+    public void deleteResumeById(@PathVariable Integer id) {
         try {
-            resume = resumeService.deleteResume(id);
+            resumeService.deleteResume(id);
             logger.info("DELETE method of resume with id:" + id);
         } catch (ResumeNotFoundException e) {
             logger.error("Resume with id:" + id + " not found.");
             ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body("Error.");
         }
-        return resume;
     }
 
     /**
@@ -92,15 +88,12 @@ public class ResumeController {
      */
     @PutMapping("/{id}")
     public Resume updateResume(@PathVariable Integer id, @RequestBody Resume newResume) {
-        Resume resume = null;
         try {
             resume = resumeService.updateResume(id, newResume);
             logger.info("PUT method by URL /resume/" + id + " with parameter new resume: " + newResume);
         } catch (ResumeNotFoundException e) {
             logger.error("Resume with id:" + id + " not found.");
             ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body("Error.");
         }
         return resume;
     }
@@ -115,16 +108,12 @@ public class ResumeController {
      */
     @GetMapping("/id/{id}")
     public Resume findResumeById(@PathVariable Integer id) {
-        Resume resume = null;
         try {
             resume = resumeService.findResumeById(id);
             logger.info("GET method with URL /resume/id (id:" + id + ")\nResponse: " + resume);
-            return resume;
         } catch (ResumeNotFoundException e) {
             logger.error("Resume not found with id:" + id);
             ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body("Error.");
         }
         return resume;
     }
@@ -139,15 +128,12 @@ public class ResumeController {
      */
     @GetMapping("/user/{user}")
     public Resume findResumeByUser(@PathVariable String user) {
-        Resume resume = null;
         try {
             resume = resumeService.findResumeByUser(user);
             logger.info("GET method with URL /resume/user (user:" + user + ")\nResponse: " + resume);
         } catch (ResumeNotFoundException e) {
             logger.error("Resume not found with user:" + user);
             ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body("Error.");
         }
         return resume;
     }
