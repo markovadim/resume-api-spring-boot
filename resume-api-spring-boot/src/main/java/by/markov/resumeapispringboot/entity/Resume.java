@@ -16,12 +16,13 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "resumes")
+@Table(name = "resume")
 public class Resume {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+    @Column(name = "username")
     String user;
     String location;
     String experience;
