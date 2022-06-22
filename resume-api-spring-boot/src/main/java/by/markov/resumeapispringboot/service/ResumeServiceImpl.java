@@ -35,7 +35,7 @@ public class ResumeServiceImpl implements ResumeService {
     public void additionResume(Resume resume) throws ResumeAlreadyExistException {
         if (resumeRepository.findResumeByUser(resume.getUser()) != null) {
             throw new ResumeAlreadyExistException();
-        }else {
+        } else {
             resumeRepository.save(resume);
         }
     }
@@ -46,14 +46,6 @@ public class ResumeServiceImpl implements ResumeService {
             throw new ResumeNotFoundException();
         }
         return resume.get();
-    }
-
-    public Resume findResumeByUser(String user) throws ResumeNotFoundException {
-        Resume resume = resumeRepository.findResumeByUser(user);
-        if (resume == null) {
-            throw new ResumeNotFoundException();
-        }
-        return resume;
     }
 
     public void deleteResume(Integer id) throws ResumeNotFoundException {
@@ -79,7 +71,11 @@ public class ResumeServiceImpl implements ResumeService {
         return resumeInDataBase.get();
     }
 
-    public Page<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience, Pageable pageable) {
-        return resumeRepository.findResumeByLocationContainsOrContactsContainsOrExperienceContains(location, contacts, experience, pageable);
+    public Page<Resume> findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(String user,
+                                                                                                         String location,
+                                                                                                         String contacts,
+                                                                                                         String experience,
+                                                                                                         Pageable pageable) {
+        return resumeRepository.findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(user, location, contacts, experience, pageable);
     }
 }

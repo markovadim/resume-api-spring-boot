@@ -14,7 +14,11 @@ import org.springframework.data.repository.CrudRepository;
 public interface ResumeRepository extends CrudRepository<Resume, Integer> {
     Resume findResumeByUser(String user);
 
-    Page<Resume> findResumeByLocationContainsOrContactsContainsOrExperienceContains(String location, String contacts, String experience, Pageable pageable);
+    Page<Resume> findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(String user,
+                                                                                                  String location,
+                                                                                                  String contacts,
+                                                                                                  String experience,
+                                                                                                  Pageable pageable);
 
     Page<Resume> findAll(Pageable pageable);
 }
