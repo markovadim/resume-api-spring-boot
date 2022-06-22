@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/resume")
+@RequestMapping("/resumes")
 @RequiredArgsConstructor
 public class ResumeController {
 
@@ -31,7 +31,13 @@ public class ResumeController {
 
     private Resume resume;
 
-    @GetMapping("/")
+    /**
+     * Show all resumes from database
+     *
+     * @param pageable - pagination
+     * @return page with 5 employees
+     */
+    @GetMapping
     public Page<Resume> showAllResumes(@PageableDefault(size = 5) Pageable pageable) {
         Page<Resume> resumePage = null;
         try {
@@ -46,10 +52,9 @@ public class ResumeController {
     /**
      * Create new resume
      *
-     * @param resume - main object with fields (location, experience, contacts)
+     * @param resume - main object with fields (user, location, experience, contacts)
      * @see Resume
      */
-
     @PostMapping
     public void createResume(@RequestBody Resume resume) {
         try {
@@ -64,7 +69,6 @@ public class ResumeController {
      * Remove resume by id
      *
      * @param id - id in database
-     * @return deleted resume
      */
     @DeleteMapping("/{id}")
     public void deleteResumeById(@PathVariable Integer id) {
@@ -106,7 +110,7 @@ public class ResumeController {
      * @throws ResumeNotFoundException (if id not found)
      * @see ResumeNotFoundException
      */
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public Resume findResumeById(@PathVariable Integer id) {
         try {
             resume = resumeService.findResumeById(id);
@@ -119,45 +123,27 @@ public class ResumeController {
     }
 
     /**
-     * Search resume by username
+     * Search resume with user, location, experience or contacts
      *
-     * @param user - username
-     * @return resume (if name was found)
-     * @throws ResumeNotFoundException (if name not found)
-     * @see ResumeNotFoundException
-     */
-    @GetMapping("/user/{user}")
-    public Resume findResumeByUser(@PathVariable String user) {
-        try {
-            resume = resumeService.findResumeByUser(user);
-            logger.info("GET method with URL /resume/user (user:" + user + ")\nResponse: " + resume);
-        } catch (ResumeNotFoundException e) {
-            logger.error("Resume not found with user:" + user);
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return resume;
-    }
-
-    /**
-     * Search resume with location, experience or contacts
-     *
+     * @param user       - username for search
      * @param location   - location of employee
      * @param contacts   - contacts of employee
      * @param experience - experience
      * @return - resume list
      */
-    @GetMapping
+    @GetMapping("/")
     public Page<Resume> findResumeByFieldOrField(@RequestParam(required = false) String location,
                                                  @RequestParam(required = false) String contacts,
                                                  @RequestParam(required = false) String experience,
+                                                 @RequestParam(required = false) String user,
                                                  @PageableDefault(size = 4, sort = {"user"}, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Resume> resumeList = null;
         try {
-            resumeList = resumeService.findResumeByLocationContainsOrContactsContainsOrExperienceContains(location, contacts, experience, pageable);
-            logger.info("Search resume by " + location + "" + contacts + "" + experience + "\nResume list: " + resumeList);
+            resumeList = resumeService.findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(user, location, contacts, experience, pageable);
+            logger.info("Search resume by " + user + location + "" + contacts + "" + experience + "\nResume list: " + resumeList);
         } catch (Exception e) {
             ResponseEntity.badRequest().body(e.getMessage());
-            logger.error("Resumes not found with " + location + contacts + experience);
+            logger.error("Resumes not found with " + user + location + contacts + experience);
         }
         return resumeList;
     }
