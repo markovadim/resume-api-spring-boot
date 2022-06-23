@@ -48,13 +48,14 @@ public class ResumeServiceImpl implements ResumeService {
         return resume.get();
     }
 
-    public void deleteResume(Integer id) throws ResumeNotFoundException {
+    public Resume deleteResume(Integer id) throws ResumeNotFoundException {
         Optional<Resume> resume = resumeRepository.findById(id);
         if (resume.isEmpty()) {
             throw new ResumeNotFoundException();
         } else {
             resumeRepository.delete(resume.get());
         }
+        return resume.get();
     }
 
     public Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException {

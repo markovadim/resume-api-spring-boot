@@ -20,7 +20,7 @@ public interface ResumeService {
 
     Resume findResumeById(Integer id) throws ResumeNotFoundException;
 
-    void deleteResume(Integer id) throws ResumeNotFoundException;
+    Resume deleteResume(Integer id) throws ResumeNotFoundException;
 
     Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException;
 
