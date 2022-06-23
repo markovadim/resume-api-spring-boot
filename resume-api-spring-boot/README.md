@@ -2,39 +2,34 @@
 ____
 
 ### Show all resumes (GET method): ###
->[GET] http://localhost:8080/resume/
+>[GET] http://localhost:8080/resumes
 >>Example:
-![image](https://user-images.githubusercontent.com/86801437/172254013-f749f828-7421-467c-bfd5-44b352038635.png)
+![image](https://user-images.githubusercontent.com/86801437/175404630-2e72da39-7ef2-4cef-8a48-a7fc005930a3.png)
 With page parameter:
-![image](https://user-images.githubusercontent.com/86801437/172717447-aa0a97ea-124a-4d53-a324-e5b4b4cdb023.png)
+![image](https://user-images.githubusercontent.com/86801437/175404776-cfafc61d-bf5a-4ed0-abdf-c25108e910f9.png)
 
 
 ### Create new resume (PUT method): ###  
->[PUT] http://localhost:8080/resume
+>[PUT] http://localhost:8080/resumes
 >>Example:
-![image](https://user-images.githubusercontent.com/86801437/172618181-9b946124-d274-4037-906b-b51939fe40ff.png)
+![image](https://user-images.githubusercontent.com/86801437/175405104-8a5a87d7-344a-45dc-a702-52444d93d8cc.png)
 
 ### Delete resume from database by id (DELETE method): ###  
->[DELETE] http://localhost:8080/:id
+>[DELETE] http://localhost:8080/resumes/:id
 >>Example:
-![image](https://user-images.githubusercontent.com/86801437/172618615-f0a7ef69-7bfd-44d4-8bcc-dc68c63db081.png)
+![image](https://user-images.githubusercontent.com/86801437/175405268-99840620-5ca7-4314-b772-fd3e96776279.png)
 
 ### Update resume in database (PUT method): ###
->[PUT] http://localhost:8080/:id
+>[PUT] http://localhost:8080/resumes/:id
 >>Example:
-![image](https://user-images.githubusercontent.com/86801437/172619134-7424b606-6a53-4aa3-b40b-ef6a73da7cb3.png)
+![image](https://user-images.githubusercontent.com/86801437/175405471-6a63559e-3820-45af-ad24-187b9c14a550.png)
 
 ### Find resume by id (GET method): ###
->[GET] http://localhost:8080/resume/id/:id
+>[GET] http://localhost:8080/resumes/:id
 >>Example:
-![image](https://user-images.githubusercontent.com/86801437/172619555-63a88c29-b204-49d0-ac12-828bc9fe1ca0.png)
-
-### Find resume by username (GET method): ###  
->[GET] http://localhost:8080/resume/user/:user
->>Example:
-![image](https://user-images.githubusercontent.com/86801437/172620008-88a4a198-c79d-4590-8af2-7a5b7ce7627d.png)
+![image](https://user-images.githubusercontent.com/86801437/175405688-bb8459d3-c240-44ee-81f2-3407999bef54.png)
 
 ### Find resume by another fields (GET method): ###  
->[GET] http://localhost:8080/resume
+>[GET] http://localhost:8080/resumes/
 >>Example (with @RequestParam ):
-![image](https://user-images.githubusercontent.com/86801437/173088304-af0e46e9-fcaf-413f-9775-cbb60587f931.png)
+![image](https://user-images.githubusercontent.com/86801437/175405965-0bf3884c-57f1-438e-b7f5-0f9e16de6f48.png)

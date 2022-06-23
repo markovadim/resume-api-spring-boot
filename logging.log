@@ -147,3 +147,91 @@ Resume list: []
 2022-06-06 00:46:10.550  INFO 16220 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2022-06-06 00:46:10.553  INFO 16220 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2022-06-06 00:46:10.567  INFO 16220 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-06-24 00:20:30.573  INFO 20204 --- [main] b.m.r.ResumeApiSpringBootApplication     : Starting ResumeApiSpringBootApplication using Java 11.0.14 on DESKTOP-FA7S5G1 with PID 20204 (C:\Users\DELL\IdeaProjects\resume-api-spring-boot\resume-api-spring-boot\build\classes\java\main started by DELL in C:\Users\DELL\IdeaProjects\resume-api-spring-boot)
+2022-06-24 00:20:30.577  INFO 20204 --- [main] b.m.r.ResumeApiSpringBootApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-06-24 00:20:32.454  INFO 20204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-24 00:20:32.560  INFO 20204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 1 JPA repository interfaces.
+2022-06-24 00:20:32.892  INFO 20204 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=fafb4a75-2f1e-38e4-86ee-25ede03d331b
+2022-06-24 00:20:33.595  INFO 20204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-06-24 00:20:33.610  INFO 20204 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-06-24 00:20:33.611  INFO 20204 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+2022-06-24 00:20:33.839  INFO 20204 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-06-24 00:20:33.839  INFO 20204 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3158 ms
+2022-06-24 00:20:34.028  INFO 20204 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-06-24 00:20:34.108  INFO 20204 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2022-06-24 00:20:34.320  INFO 20204 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-06-24 00:20:34.456  INFO 20204 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-06-24 00:20:34.669  INFO 20204 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-06-24 00:20:34.701  INFO 20204 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2022-06-24 00:20:35.891  INFO 20204 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-06-24 00:20:35.918  INFO 20204 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-24 00:20:36.662  WARN 20204 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-06-24 00:20:37.766  INFO 20204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-06-24 00:20:38.058  INFO 20204 --- [main] b.m.r.ResumeApiSpringBootApplication     : Started ResumeApiSpringBootApplication in 9.289 seconds (JVM running for 11.492)
+2022-06-24 00:20:47.258  INFO 20204 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-06-24 00:20:47.261  INFO 20204 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-06-24 00:20:47.262  INFO 20204 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-06-24 00:20:47.453  INFO 20204 --- [http-nio-8080-exec-2] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.showAllResumes(Pageable) With arguments: [Page request [number: 0, size 5, sort: UNSORTED]]
+Result:
+2022-06-24 00:20:47.460  INFO 20204 --- [http-nio-8080-exec-2] b.m.r.aspect.ResponseLogAspect           : Resume(id=2, user=Viktor, location=Minsk, experience=2011 - 2019, contacts=Telegram: vikwin1991)
+2022-06-24 00:20:47.461  INFO 20204 --- [http-nio-8080-exec-2] b.m.r.aspect.ResponseLogAspect           : Resume(id=3, user=Vladlen, location=Kiev, experience=2011 - 2018, contacts=Telegram: vlad0000099)
+2022-06-24 00:20:47.461  INFO 20204 --- [http-nio-8080-exec-2] b.m.r.aspect.ResponseLogAspect           : Resume(id=4, user=Yulia, location=Minsk, experience=2018 - 2021, contacts=Telegram: damas96)
+2022-06-24 00:20:47.461  INFO 20204 --- [http-nio-8080-exec-2] b.m.r.aspect.ResponseLogAspect           : Resume(id=5, user=Nik, location=New-York, experience=2016 - 2020, contacts=nik@gmail.com, facebook: Nik-006)
+2022-06-24 00:20:47.461  INFO 20204 --- [http-nio-8080-exec-2] b.m.r.aspect.ResponseLogAspect           : Resume(id=8, user=Igor, location=Kiev, experience=2017-2018, 2020-2022, contacts=ggorik@gmail.com, facebook: ggorik09, telegram: igorik09)
+2022-06-24 00:23:03.175  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.showAllResumes(Pageable) With arguments: [Page request [number: 2, size 5, sort: UNSORTED]]
+Result:
+2022-06-24 00:23:03.176  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : Resume(id=9, user=Maria, location=Samara, experience=2011 - 2019, 2020 - 2022, contacts=88041342765)
+2022-06-24 00:23:03.177  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : Resume(id=15, user=Maxim, location=Brest, experience=2018 - 2019, contacts=80447542344)
+2022-06-24 00:23:03.178  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : Resume(id=16, user=Max, location=Brest, experience=2018 - 2019, contacts=80447542344)
+2022-06-24 00:23:03.179  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : Resume(id=17, user=Nikolai, location=Brest, experience=2013 - 2019, contacts=803365677890)
+2022-06-24 00:23:03.179  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : Resume(id=1, user=Sergey, location=Riga, experience=2016 - 2021, 2022 - present, contacts=Facebook: sergio-11-OK)
+2022-06-24 00:24:10.917  INFO 20204 --- [http-nio-8080-exec-8] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Resume by.markov.resumeapispringboot.controller.ResumeController.createResume(Resume) With arguments: [Resume(id=20, user=Semen, location=Gomel, experience=2011 - 2021, contacts=Facebook: semenOK1992)]
+Result:
+2022-06-24 00:24:10.919  INFO 20204 --- [http-nio-8080-exec-8] b.m.r.aspect.ResponseLogAspect           : Resume(id=20, user=Semen, location=Gomel, experience=2011 - 2021, contacts=Facebook: semenOK1992)
+2022-06-24 00:29:19.380  INFO 20204 --- [http-nio-8080-exec-1] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Resume by.markov.resumeapispringboot.controller.ResumeController.findResumeById(Integer) With arguments: [3]
+Result:
+2022-06-24 00:29:19.381  INFO 20204 --- [http-nio-8080-exec-1] b.m.r.aspect.ResponseLogAspect           : Resume(id=3, user=Vladlen, location=Kiev, experience=2011 - 2018, contacts=Telegram: vlad0000099)
+2022-06-24 00:30:44.049  INFO 20204 --- [http-nio-8080-exec-4] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.showAllResumes(Pageable) With arguments: [Page request [number: 0, size 5, sort: UNSORTED]]
+Result:
+2022-06-24 00:30:44.050  INFO 20204 --- [http-nio-8080-exec-4] b.m.r.aspect.ResponseLogAspect           : Resume(id=2, user=Viktor, location=Minsk, experience=2011 - 2019, contacts=Telegram: vikwin1991)
+2022-06-24 00:30:44.051  INFO 20204 --- [http-nio-8080-exec-4] b.m.r.aspect.ResponseLogAspect           : Resume(id=3, user=Vladlen, location=Kiev, experience=2011 - 2018, contacts=Telegram: vlad0000099)
+2022-06-24 00:30:44.051  INFO 20204 --- [http-nio-8080-exec-4] b.m.r.aspect.ResponseLogAspect           : Resume(id=4, user=Yulia, location=Minsk, experience=2018 - 2021, contacts=Telegram: damas96)
+2022-06-24 00:30:44.053  INFO 20204 --- [http-nio-8080-exec-4] b.m.r.aspect.ResponseLogAspect           : Resume(id=5, user=Nik, location=New-York, experience=2016 - 2020, contacts=nik@gmail.com, facebook: Nik-006)
+2022-06-24 00:30:44.053  INFO 20204 --- [http-nio-8080-exec-4] b.m.r.aspect.ResponseLogAspect           : Resume(id=8, user=Igor, location=Kiev, experience=2017-2018, 2020-2022, contacts=ggorik@gmail.com, facebook: ggorik09, telegram: igorik09)
+2022-06-24 00:30:49.398  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.findResumeByFieldOrField(String,String,String,String,Pageable) With arguments: [Riga, null, null, null, Page request [number: 0, size 4, sort: user: ASC]]
+Result:
+2022-06-24 00:30:49.399  INFO 20204 --- [http-nio-8080-exec-9] b.m.r.aspect.ResponseLogAspect           : Resume(id=1, user=Sergey, location=Riga, experience=2016 - 2021, 2022 - present, contacts=Facebook: sergio-11-OK)
+2022-06-24 00:30:58.233  INFO 20204 --- [http-nio-8080-exec-10] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.findResumeByFieldOrField(String,String,String,String,Pageable) With arguments: [Minsk, null, null, null, Page request [number: 0, size 4, sort: user: ASC]]
+Result:
+2022-06-24 00:30:58.234  INFO 20204 --- [http-nio-8080-exec-10] b.m.r.aspect.ResponseLogAspect           : Resume(id=6, user=Vadim, location=Minsk, experience=2016 - present, contacts=daim@gmail.com, facebook: vadim1313ok)
+2022-06-24 00:30:58.235  INFO 20204 --- [http-nio-8080-exec-10] b.m.r.aspect.ResponseLogAspect           : Resume(id=2, user=Viktor, location=Minsk, experience=2011 - 2019, contacts=Telegram: vikwin1991)
+2022-06-24 00:30:58.235  INFO 20204 --- [http-nio-8080-exec-10] b.m.r.aspect.ResponseLogAspect           : Resume(id=4, user=Yulia, location=Minsk, experience=2018 - 2021, contacts=Telegram: damas96)
+2022-06-24 00:31:04.048  INFO 20204 --- [http-nio-8080-exec-7] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.findResumeByFieldOrField(String,String,String,String,Pageable) With arguments: [Minsk, null, null, null, Page request [number: 1, size 4, sort: user: ASC]]
+Result:
+2022-06-24 00:31:07.134  INFO 20204 --- [http-nio-8080-exec-8] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.findResumeByFieldOrField(String,String,String,String,Pageable) With arguments: [Minsk, null, null, null, Page request [number: 0, size 4, sort: user: ASC]]
+Result:
+2022-06-24 00:31:07.134  INFO 20204 --- [http-nio-8080-exec-8] b.m.r.aspect.ResponseLogAspect           : Resume(id=6, user=Vadim, location=Minsk, experience=2016 - present, contacts=daim@gmail.com, facebook: vadim1313ok)
+2022-06-24 00:31:07.134  INFO 20204 --- [http-nio-8080-exec-8] b.m.r.aspect.ResponseLogAspect           : Resume(id=2, user=Viktor, location=Minsk, experience=2011 - 2019, contacts=Telegram: vikwin1991)
+2022-06-24 00:31:07.135  INFO 20204 --- [http-nio-8080-exec-8] b.m.r.aspect.ResponseLogAspect           : Resume(id=4, user=Yulia, location=Minsk, experience=2018 - 2021, contacts=Telegram: damas96)
+2022-06-24 00:31:14.866  INFO 20204 --- [http-nio-8080-exec-3] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.findResumeByFieldOrField(String,String,String,String,Pageable) With arguments: [Kiev, null, null, null, Page request [number: 0, size 4, sort: user: ASC]]
+Result:
+2022-06-24 00:31:14.867  INFO 20204 --- [http-nio-8080-exec-3] b.m.r.aspect.ResponseLogAspect           : Resume(id=8, user=Igor, location=Kiev, experience=2017-2018, 2020-2022, contacts=ggorik@gmail.com, facebook: ggorik09, telegram: igorik09)
+2022-06-24 00:31:14.867  INFO 20204 --- [http-nio-8080-exec-3] b.m.r.aspect.ResponseLogAspect           : Resume(id=12, user=Svetlana, location=Kiev, experience=2019 - 2022, contacts=svet0909lana@gmail.com)
+2022-06-24 00:31:14.868  INFO 20204 --- [http-nio-8080-exec-3] b.m.r.aspect.ResponseLogAspect           : Resume(id=3, user=Vladlen, location=Kiev, experience=2011 - 2018, contacts=Telegram: vlad0000099)
+2022-06-24 00:31:31.647  INFO 20204 --- [http-nio-8080-exec-6] b.m.r.aspect.ResponseLogAspect           : 
+Execution of method with return type: Page by.markov.resumeapispringboot.controller.ResumeController.findResumeByFieldOrField(String,String,String,String,Pageable) With arguments: [Kiev, facebook, null, null, Page request [number: 0, size 4, sort: user: ASC]]
+Result:
+2022-06-24 00:31:31.648  INFO 20204 --- [http-nio-8080-exec-6] b.m.r.aspect.ResponseLogAspect           : Resume(id=8, user=Igor, location=Kiev, experience=2017-2018, 2020-2022, contacts=ggorik@gmail.com, facebook: ggorik09, telegram: igorik09)
+2022-06-24 00:31:31.649  INFO 20204 --- [http-nio-8080-exec-6] b.m.r.aspect.ResponseLogAspect           : Resume(id=5, user=Nik, location=New-York, experience=2016 - 2020, contacts=nik@gmail.com, facebook: Nik-006)
+2022-06-24 00:31:31.650  INFO 20204 --- [http-nio-8080-exec-6] b.m.r.aspect.ResponseLogAspect           : Resume(id=12, user=Svetlana, location=Kiev, experience=2019 - 2022, contacts=svet0909lana@gmail.com)
+2022-06-24 00:31:31.650  INFO 20204 --- [http-nio-8080-exec-6] b.m.r.aspect.ResponseLogAspect           : Resume(id=6, user=Vadim, location=Minsk, experience=2016 - present, contacts=daim@gmail.com, facebook: vadim1313ok)
