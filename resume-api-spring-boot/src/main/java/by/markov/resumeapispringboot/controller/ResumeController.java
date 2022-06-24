@@ -27,8 +27,6 @@ public class ResumeController {
 
     private final ResumeServiceImpl resumeService;
 
-    private static final Logger logger = LoggerFactory.getLogger(ResumeController.class);
-
     private Resume resume;
 
     /**
