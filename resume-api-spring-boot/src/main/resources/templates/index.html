@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+</head>
+<body>
+<div class="container my-2">
+    <h1>Resumes list</h1>
+    <a th:href="@{/resumes/new_employee}" class="btn-info btn-sm mb-auto"> Add Resume </a>
+
+    <table class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Employee name</th>
+            <th>Employee location</th>
+            <th>Employee experience</th>
+            <th>Employee contacts</th>
+            <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resume : ${resumePage}">
+            <td th:text="${resume.user}"></td>
+            <td th:text="${resume.location}"></td>
+            <td th:text="${resume.experience}"></td>
+            <td th:text="${resume.contacts}"></td>
+
+            <td><a th:href="@{/resumes/{id}/edit/(id=${resume.id})}" class="btn-info btn-sm mb-auto">Update</a>
+                <a th:href="@{/resumes/remove/{id}(id=${resume.id})}" class="btn-info btn-sm mb-auto">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -1,9 +1,7 @@
 package by.markov.resumeapispringboot.service;
 
-
 import by.markov.resumeapispringboot.repository.ResumeRepository;
 import by.markov.resumeapispringboot.entity.Resume;
-import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,40 +21,32 @@ import java.util.Optional;
 public class ResumeServiceImpl implements ResumeService {
     private final ResumeRepository resumeRepository;
 
-    public Page<Resume> showResumeList(Pageable pageable) throws ResumeNotFoundException {
-        Page<Resume> resumeIterable = resumeRepository.findAll(pageable);
-        if (resumeIterable.isEmpty()) {
+    public Page<Resume> findAll(Pageable pageable) throws ResumeNotFoundException {
+        Page<Resume> resumeList = resumeRepository.findAll(pageable);
+        if (resumeList.isEmpty()) {
             throw new ResumeNotFoundException();
-        } else {
-            return resumeIterable;
         }
+        return resumeList;
     }
 
-    public void additionResume(Resume resume) throws ResumeAlreadyExistException {
-        if (resumeRepository.findResumeByUser(resume.getUser()) != null) {
-            throw new ResumeAlreadyExistException();
-        } else {
-            resumeRepository.save(resume);
-        }
+    public Resume addResume(Resume resume) {
+        resumeRepository.save(resume);
+        return resume;
     }
 
     public Resume findResumeById(Integer id) throws ResumeNotFoundException {
-        Optional<Resume> resume = resumeRepository.findById(id);
-        if (resume.isEmpty()) {
-            throw new ResumeNotFoundException();
-        }
-        return resume.get();
+        return resumeRepository.findById(id).orElseThrow(ResumeNotFoundException::new);
     }
 
     public Resume deleteResume(Integer id) throws ResumeNotFoundException {
-        Optional<Resume> resume = resumeRepository.findById(id);
-        if (resume.isEmpty()) {
-            throw new ResumeNotFoundException();
-        } else {
-            resumeRepository.delete(resume.get());
-        }
-        return resume.get();
+        Resume resume = resumeRepository.findById(id).orElseThrow(ResumeNotFoundException::new);
+        resumeRepository.delete(resume);
+        return resume;
     }
+
+    /*
+        This part for REST API application version from master branch.
+     */
 
     public Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException {
         Optional<Resume> resumeInDataBase = resumeRepository.findById(id);

@@ -14,9 +14,9 @@ import org.springframework.data.domain.Pageable;
  */
 
 public interface ResumeService {
-    Page<Resume> showResumeList(Pageable pageable) throws ResumeNotFoundException;
+    Page<Resume> findAll(Pageable pageable) throws ResumeNotFoundException;
 
-    void additionResume(Resume resume) throws ResumeAlreadyExistException;
+    Resume addResume(Resume resume) throws ResumeAlreadyExistException;
 
     Resume findResumeById(Integer id) throws ResumeNotFoundException;
 
