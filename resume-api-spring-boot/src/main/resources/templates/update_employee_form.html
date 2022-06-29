@@ -8,11 +8,15 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 </head>
+
 <body>
-<div class="container">
-    <h1>Resume Management System</h1>
+<div th:insert="navbar :: copy"></div>
+<div class="container" style="color:darkcyan;font-family: monospace;">
     <hr>
-    <h2>Update Resume</h2>
+
+    <div class="row justify-content-md-center" style="color:gray;font-family: monospace;">
+        <h2>Update resume</h2>
+    </div>
 
     <form action="#" th:action="@{/resumes}" th:object="${currentResume}"
           method="POST">
@@ -27,11 +31,12 @@
 
         <input type="text" th:field="*{contacts}" class="form-control mb-4 col-4">
 
-        <button type="submit" class="btn btn-info col-2"> Update Resume</button>
+        <button type="submit" class="btn btn-info col-2"> Update</button>
     </form>
+
     <hr>
 
-    <a th:href="@{/resumes}"> Back to Employee List</a>
+    <a th:href="@{/resumes}" class="btn btn-info col-5"> Back to Employee List</a>
 </div>
 </body>
 </html>

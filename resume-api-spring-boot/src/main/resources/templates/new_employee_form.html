@@ -6,12 +6,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body>
 
-<div class="container">
-    <h1>Resume Management System</h1>
+<body>
+<div th:insert="navbar :: copy"></div>
+<div class="container" style="color:darkcyan;font-family: monospace;">
     <hr>
-    <h2>Create new resume</h2>
+
+    <div class="row justify-content-md-center" style="color:gray;font-family: monospace;">
+        <h2>Create new resume</h2>
+    </div>
 
     <form action="#" th:action="@{/resumes}" th:object="${resume}" method="POST">
 
@@ -23,10 +26,11 @@
 
         <input type="text" th:field="*{contacts}" placeholder="Contacts" class="form-control mb-4 col-4">
 
-        <button type="submit" class="btn btn-info col-2"> Save resume</button>
+        <button type="submit" class="btn btn-info col-2"> Save</button>
     </form>
 
     <hr>
+
     <a th:href="@{/resumes}" class="btn btn-info col-5"> Back to Resume List</a>
 </div>
 
