@@ -24,12 +24,15 @@
         <input type="hidden" th:field="*{id}"/>
 
         <input type="text" th:field="*{user}" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('user')}" th:errors="*{user}">User error</div>
 
         <input type="text" th:field="*{location}" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('location')}" th:errors="*{location}">Location error</div>
 
         <input type="text" th:field="*{experience}" class="form-control mb-4 col-4">
 
         <input type="text" th:field="*{contacts}" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('contacts')}" th:errors="*{contacts}">Contacts error</div>
 
         <button type="submit" class="btn btn-info col-2"> Update</button>
     </form>

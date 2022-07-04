@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,8 +22,8 @@ import java.util.Optional;
 public class ResumeServiceImpl implements ResumeService {
     private final ResumeRepository resumeRepository;
 
-    public Page<Resume> findAll(Pageable pageable) throws ResumeNotFoundException {
-        Page<Resume> resumeList = resumeRepository.findAll(pageable);
+    public List<Resume> findAll() throws ResumeNotFoundException {
+        List<Resume> resumeList = resumeRepository.findAll();
         if (resumeList.isEmpty()) {
             throw new ResumeNotFoundException();
         }

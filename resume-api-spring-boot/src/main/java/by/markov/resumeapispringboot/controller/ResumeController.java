@@ -12,7 +12,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Main controller for CRUD resume
@@ -36,8 +40,9 @@ public class ResumeController {
      * @return home page with 20 employees on page
      */
     @GetMapping
-    public String showAllResumes(@PageableDefault(size = 50, sort = {"user"}) Pageable pageable, Model model) throws ResumeNotFoundException {
-        model.addAttribute("resumePage", resumeService.findAll(pageable));
+    public String showAllResumes(@PageableDefault(sort = {"user"}) Pageable pageable, Model model) throws ResumeNotFoundException {
+        List<Resume> resumePage = resumeService.findAll();
+        model.addAttribute("resumePage", resumePage);
         return "index";
     }
 
@@ -61,7 +66,11 @@ public class ResumeController {
      * @see Resume
      */
     @PostMapping
-    public String createResume(@ModelAttribute("resume") Resume resume) throws ResumeAlreadyExistException {
+    public String createResume(@ModelAttribute("resume") @Valid Resume resume, BindingResult bindingResult) throws ResumeAlreadyExistException {
+
+        if (bindingResult.hasErrors()) {
+            return "new_employee_form";
+        }
         resumeService.addResume(resume);
         return "redirect:/resumes";
     }

@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * DAO level for work with main object
  *
@@ -20,5 +22,5 @@ public interface ResumeRepository extends CrudRepository<Resume, Integer> {
                                                                                                   String experience,
                                                                                                   Pageable pageable);
 
-    Page<Resume> findAll(Pageable pageable);
+    List<Resume> findAll();
 }
