@@ -13,18 +13,19 @@
     <hr>
 
     <div class="row justify-content-md-center" style="color:gray;font-family: monospace;">
-        <h2>Create new employee</h2>
+        <h2>Add new employee</h2>
     </div>
 
     <form action="#" th:action="@{/employees}" th:object="${employee}" method="POST">
 
-        <input type="text" th:field="*{name}" placeholder="Username" class="form-control mb-4 col-4">
-        <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">User error</div>
+        <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
 
         <input type="text" th:field="*{age}" placeholder="Age" class="form-control mb-4 col-4">
-        <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Location error</div>
+        <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Number error</div>
 
         <input type="text" th:field="*{location}" placeholder="Location" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('location')}" th:errors="*{location}">Location error</div>
 
         <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
         <div style="color: brown" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Contacts error</div>

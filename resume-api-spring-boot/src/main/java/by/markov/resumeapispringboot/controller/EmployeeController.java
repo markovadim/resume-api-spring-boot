@@ -66,7 +66,7 @@ public class EmployeeController {
      * @see Employee
      */
     @PostMapping
-    public String createEmployee(@ModelAttribute("resume") @Valid Employee employee, BindingResult bindingResult) throws EmployeeAlreadyExistException {
+    public String createEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult) throws EmployeeAlreadyExistException {
 
         if (bindingResult.hasErrors()) {
             return "new_employee_form";
