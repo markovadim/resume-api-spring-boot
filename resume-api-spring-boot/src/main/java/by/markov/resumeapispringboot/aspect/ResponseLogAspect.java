@@ -13,7 +13,7 @@ import java.util.Arrays;
 @Slf4j
 public class ResponseLogAspect {
 
-    @Pointcut("execution(* by.markov.resumeapispringboot.controller.ResumeController.*(..))")
+    @Pointcut("execution(* by.markov.resumeapispringboot.controller.EmployeeController.*(..))")
     public void loggingWithAnnotation() {
     }
 

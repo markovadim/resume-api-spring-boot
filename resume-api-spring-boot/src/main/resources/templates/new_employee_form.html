@@ -13,28 +13,28 @@
     <hr>
 
     <div class="row justify-content-md-center" style="color:gray;font-family: monospace;">
-        <h2>Create new resume</h2>
+        <h2>Create new employee</h2>
     </div>
 
-    <form action="#" th:action="@{/resumes}" th:object="${resume}" method="POST">
+    <form action="#" th:action="@{/employees}" th:object="${employee}" method="POST">
 
-        <input type="text" th:field="*{user}" placeholder="Username" class="form-control mb-4 col-4">
-        <div style="color: brown" th:if="${#fields.hasErrors('user')}" th:errors="*{user}">User error</div>
+        <input type="text" th:field="*{name}" placeholder="Username" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">User error</div>
+
+        <input type="text" th:field="*{age}" placeholder="Age" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Location error</div>
 
         <input type="text" th:field="*{location}" placeholder="Location" class="form-control mb-4 col-4">
-        <div style="color: brown" th:if="${#fields.hasErrors('location')}" th:errors="*{location}">Location error</div>
 
-        <input type="text" th:field="*{experience}" placeholder="Experience" class="form-control mb-4 col-4">
-
-        <input type="text" th:field="*{contacts}" placeholder="Contacts" class="form-control mb-4 col-4">
-        <div style="color: brown" th:if="${#fields.hasErrors('contacts')}" th:errors="*{contacts}">Contacts error</div>
+        <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
+        <div style="color: brown" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Contacts error</div>
 
         <button type="submit" class="btn btn-info col-2"> Save</button>
     </form>
 
     <hr>
 
-    <a th:href="@{/resumes}" class="btn btn-info col-5"> Back to Resume List</a>
+    <a th:href="@{/employees}" class="btn btn-info col-5"> Back to Employee List</a>
 </div>
 
 </body>

@@ -23,11 +23,11 @@
         <thead>
         <tr>
             <th>Username</th>
+            <th>Age</th>
             <th>Location</th>
-            <th>Experience</th>
-            <th>Contacts</th>
+            <th>Email</th>
             <th>
-                <a th:href="@{/resumes/new_employee}">
+                <a th:href="@{/employees/new_employee}">
                     <button type="button" class="btn btn-success"
                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem;">
                         Add employee
@@ -37,14 +37,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="resume : ${resumePage}">
-            <td th:text="${resume.user}"></td>
-            <td th:text="${resume.location}"></td>
-            <td th:text="${resume.experience}"></td>
-            <td th:text="${resume.contacts}"></td>
+        <tr th:each="employee : ${employeePage}">
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.age}"></td>
+            <td th:text="${employee.location}"></td>
+            <td th:text="${employee.email}"></td>
 
-            <td><a th:href="@{/resumes/{id}/edit/(id=${resume.id})}" class="btn btn-primary btn-sm mb-auto">Update</a>
-                <a th:href="@{/resumes/remove/{id}(id=${resume.id})}" class="btn btn-danger btn-sm mb-auto">Delete</a>
+            <td><a th:href="@{/employees/{id}/edit/(id=${employee.id})}"
+                   class="btn btn-primary btn-sm mb-auto">Update</a>
+                <a th:href="@{/employees/remove/{id}(id=${employee.id})}"
+                   class="btn btn-danger btn-sm mb-auto">Delete</a>
             </td>
         </tr>
         </tbody>

@@ -6,9 +6,9 @@ package by.markov.resumeapispringboot.exceptions;
  * @author markov_vadim
  */
 
-public class ResumeAlreadyExistException extends Exception {
+public class EmployeeAlreadyExistException extends Exception {
 
-    public ResumeAlreadyExistException() {
+    public EmployeeAlreadyExistException() {
         super("Resume Already Exist.");
     }
 }

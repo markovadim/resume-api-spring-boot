@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -18,24 +20,24 @@ import javax.validation.constraints.Size;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "resume")
-public class Resume {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(name = "username")
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 20, message = "Name should be between 2 and 20 characters")
-    String user;
+    String name;
+
+    @Min(value = 0, message = "Age should be greater than 0")
+    Integer age;
 
     @NotEmpty(message = "Location should not be empty")
     @Size(min = 2, max = 20, message = "Location should be between 2 and 20 characters")
     String location;
 
-    String experience;
-
+    @Email(message = "Input email is not correct")
     @NotEmpty(message = "Contacts should not be empty")
-    String contacts;
+    String email;
 }
