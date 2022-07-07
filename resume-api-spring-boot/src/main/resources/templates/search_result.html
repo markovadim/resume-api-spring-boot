@@ -14,8 +14,8 @@
 <div class="container my-2" style="font-family: monospace">
 
     <div class="container-xl">
-        <div class="row justify-content-md-center" >
-            <h1> Employees </h1>
+        <div class="row justify-content-md-center">
+            <h1> Search result: <a th:text="${keyword}"></a></h1>
         </div>
     </div>
 
@@ -26,33 +26,20 @@
             <th>Age</th>
             <th>Location</th>
             <th>Email</th>
-            <th>
-                <a th:href="@{/employees/new_employee}">
-                    <button type="button" class="btn btn-info"
-                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem;">
-                        Add employee
-                    </button>
-                </a>
-            </th>
         </tr>
         </thead>
+
         <tbody>
-        <tr th:each="employee : ${employeePage}">
+        <tr th:each="employee : ${people}">
             <td th:text="${employee.name}"></td>
             <td th:text="${employee.age}"></td>
             <td th:text="${employee.location}"></td>
             <td th:text="${employee.email}"></td>
-
-            <td><a th:href="@{/employees/{id}/edit/(id=${employee.id})}"
-                   class="btn btn-info btn-sm mb-auto">Update</a>
-                <a th:href="@{/employees/remove/{id}(id=${employee.id})}"
-                   class="btn btn-danger btn-sm mb-auto">Delete</a>
-            </td>
         </tr>
         </tbody>
     </table>
+    <a th:href="@{/employees}" class="btn btn-info col-12"> Back to Employee List</a>
 </div>
-
 
 </body>
 </html>

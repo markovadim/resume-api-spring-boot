@@ -1,15 +1,15 @@
 package by.markov.resumeapispringboot.service;
 
 import by.markov.resumeapispringboot.entity.Employee;
+import by.markov.resumeapispringboot.exceptions.EmployeeAlreadyExistException;
 import by.markov.resumeapispringboot.repository.EmployeeRepository;
 import by.markov.resumeapispringboot.exceptions.EmployeeNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Implementation service interface
@@ -30,7 +30,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeList;
     }
 
-    public Employee addEmployee(Employee employee) {
+    public Employee addEmployee(Employee employee) throws EmployeeAlreadyExistException {
+        if (employeeRepository.findEmployeeByEmail(employee.getEmail()) != null) {
+            throw new EmployeeAlreadyExistException();
+        }
         employeeRepository.save(employee);
         return employee;
     }
@@ -44,10 +47,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.delete(employee);
         return employee;
     }
-
-    /*
-        This part for REST API application version from master branch.
-     */
 
     public Employee updateEmployee(Integer id, Employee newEmployee) throws EmployeeNotFoundException {
         Optional<Employee> resumeInDataBase = employeeRepository.findById(id);
@@ -63,11 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return resumeInDataBase.get();
     }
 
-    public Page<Employee> findEmployeeByNameContainsOrAgeContainsOrLocationContainsOrEmailContains(String name,
-                                                                                                   Integer age,
-                                                                                                   String location,
-                                                                                                   String email,
-                                                                                                   Pageable pageable) {
-        return employeeRepository.findEmployeeByNameContainsOrAgeContainsOrLocationContainsOrEmailContains(name, age, location, email, pageable);
+    public List<Employee> findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(String keyword) {
+        return employeeRepository.findAll().stream().filter(e -> e.toString().contains(keyword)).collect(Collectors.toList());
     }
 }

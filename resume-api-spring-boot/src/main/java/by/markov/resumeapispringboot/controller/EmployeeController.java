@@ -103,51 +103,12 @@ public class EmployeeController {
         return "update_employee_form";
     }
 
-
-    /*
-        This controller part for search resumes by id, username, location, experience and contacts.
-        These methods for REST API part from master branch.
-     */
-
-    /**
-     * Search employee by id
-     *
-     * @param id - id in database
-     * @return resume (if id was found)
-     * @throws EmployeeNotFoundException (if id not found)
-     * @see EmployeeNotFoundException
-     */
-    @GetMapping("/{id}")
-    public Employee findEmployeeById(@PathVariable Integer id) {
-        try {
-            employee = employeeService.findEmployeeById(id);
-        } catch (EmployeeNotFoundException e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return employee;
-    }
-
-    /**
-     * Search employee with name, age, location and email.
-     *
-     * @param name     - username for search
-     * @param age      - age of employee
-     * @param location - location of employee
-     * @param email    - contact email
-     * @return - employee list
-     */
-    @GetMapping("/")
-    public Page<Employee> findResumeByFieldOrField(@RequestParam(required = false) String name,
-                                                   @RequestParam(required = false) Integer age,
-                                                   @RequestParam(required = false) String location,
-                                                   @RequestParam(required = false) String email,
-                                                   @PageableDefault(size = 4, sort = {"name"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        Page<Employee> employeeList = null;
-        try {
-            employeeList = employeeService.findEmployeeByNameContainsOrAgeContainsOrLocationContainsOrEmailContains(name, age, location, email, pageable);
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return employeeList;
+    @GetMapping("/search")
+    public String searchResultEmployees(@RequestParam(required = false) String keyword,
+                                        Model model) throws EmployeeNotFoundException {
+        List<Employee> people = employeeService.findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(keyword);
+        model.addAttribute("people", people);
+        model.addAttribute("keyword", keyword);
+        return "search_result";
     }
 }

@@ -1,10 +1,12 @@
 # DATABASE
 
 spring:
+  profiles:
+    active: dev
   jpa:
     hibernate:
       ddl-auto: update
-
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
