@@ -263,6 +263,7 @@ Caused by: org.springframework.data.repository.query.QueryCreationException: Cou
 	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:144) ~[spring-data-jpa-2.7.0.jar:2.7.0]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863) ~[spring-beans-5.3.20.jar:5.3.20]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.20.jar:5.3.20]
+<<<<<<< HEAD
 	... 49 common frames omitted
 Caused by: java.lang.IllegalArgumentException: Failed to create query for method public abstract by.markov.resumeapispringboot.entity.Employee by.markov.resumeapispringboot.repository.EmployeeRepository.findEmployeeByUser(java.lang.String)! No property 'user' found for type 'Employee'!
 	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:96) ~[spring-data-jpa-2.7.0.jar:2.7.0]
