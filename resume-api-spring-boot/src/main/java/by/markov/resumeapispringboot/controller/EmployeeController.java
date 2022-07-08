@@ -7,9 +7,7 @@ import by.markov.resumeapispringboot.service.EmployeeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,25 +29,28 @@ public class EmployeeController {
 
     private final EmployeeServiceImpl employeeService;
 
-    private Employee employee;
-
     /**
      * Show all employees from database
      *
      * @param pageable - pagination
+     * @param model    - model list for template
      * @return home page with 20 employees on page
      */
     @GetMapping
-    public String showAllEmployees(@PageableDefault(sort = {"name"}) Pageable pageable, Model model) throws EmployeeNotFoundException {
-        List<Employee> employeePage = employeeService.findAll();
+    public String findAll(@PageableDefault(sort = {"name"}) Pageable pageable, Model model){
+        Page<Employee> employeePage = employeeService.findAll(pageable);
         model.addAttribute("employeePage", employeePage);
+        model.addAttribute("currentPage", employeePage.getNumber());
+        model.addAttribute("totalPages", employeePage.getTotalPages());
+        model.addAttribute("totalElements", employeePage.getTotalElements());
+        model.addAttribute("content", employeePage.getContent());
         return "index";
     }
 
     /**
      * Representing html form for new employee from templates package
      *
-     * @param model - employee
+     * @param model - employee for template
      * @return html form for new resume
      */
     @GetMapping("/new_employee")
@@ -61,13 +62,13 @@ public class EmployeeController {
     /**
      * Saving new employee
      *
-     * @param employee - main object with fields (user, location, experience, contacts)
+     * @param employee      - main object with fields (user, location, experience, contacts)
+     * @param bindingResult - object of incorrect input (validation of input data)
      * @return home page
      * @see Employee
      */
     @PostMapping
     public String createEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult) throws EmployeeAlreadyExistException {
-
         if (bindingResult.hasErrors()) {
             return "new_employee_form";
         }
@@ -103,12 +104,17 @@ public class EmployeeController {
         return "update_employee_form";
     }
 
-    @GetMapping("/search")
-    public String searchResultEmployees(@RequestParam(required = false) String keyword,
-                                        Model model) throws EmployeeNotFoundException {
-        List<Employee> people = employeeService.findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(keyword);
-        model.addAttribute("people", people);
-        model.addAttribute("keyword", keyword);
-        return "search_result";
-    }
+    /**
+     * @param keyword - input word for search employees
+     * @param model   - model list for template
+     * @return - template with search result
+     */
+//    @GetMapping("/search")
+//    public String findEmployeesByKeyword(@RequestParam(required = false) String keyword,
+//                                         Model model) {
+//        List<Employee> people = employeeService.findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(keyword);
+//        model.addAttribute("people", people);
+//        model.addAttribute("keyword", keyword);
+//        return "search_result";
+//    }
 }

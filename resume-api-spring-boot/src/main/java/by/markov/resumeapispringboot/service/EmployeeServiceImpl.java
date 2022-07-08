@@ -5,10 +5,11 @@ import by.markov.resumeapispringboot.exceptions.EmployeeAlreadyExistException;
 import by.markov.resumeapispringboot.repository.EmployeeRepository;
 import by.markov.resumeapispringboot.exceptions.EmployeeNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -22,12 +23,8 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public List<Employee> findAll() throws EmployeeNotFoundException {
-        List<Employee> employeeList = employeeRepository.findAll();
-        if (employeeList.isEmpty()) {
-            throw new EmployeeNotFoundException();
-        }
-        return employeeList;
+    public Page<Employee> findAll(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
 
     public Employee addEmployee(Employee employee) throws EmployeeAlreadyExistException {
@@ -49,20 +46,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public Employee updateEmployee(Integer id, Employee newEmployee) throws EmployeeNotFoundException {
-        Optional<Employee> resumeInDataBase = employeeRepository.findById(id);
-        if (resumeInDataBase.isEmpty()) {
-            throw new EmployeeNotFoundException();
-        } else {
-            resumeInDataBase.get().setName(newEmployee.getName());
-            resumeInDataBase.get().setAge(newEmployee.getAge());
-            resumeInDataBase.get().setLocation(newEmployee.getLocation());
-            resumeInDataBase.get().setEmail(newEmployee.getEmail());
-            employeeRepository.save(resumeInDataBase.get());
-        }
-        return resumeInDataBase.get();
+        Employee currentEmployee = employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+        currentEmployee.setName(newEmployee.getName());
+        currentEmployee.setAge(newEmployee.getAge());
+        currentEmployee.setLocation(newEmployee.getLocation());
+        currentEmployee.setEmail(newEmployee.getEmail());
+        return employeeRepository.save(currentEmployee);
     }
 
-    public List<Employee> findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(String keyword) {
-        return employeeRepository.findAll().stream().filter(e -> e.toString().contains(keyword)).collect(Collectors.toList());
-    }
+//    public List<Employee> findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(String keyword) {
+//        return employeeRepository.findAll().stream().filter(e -> e.toString().contains(keyword)).collect(Collectors.toList());
+//    }
 }

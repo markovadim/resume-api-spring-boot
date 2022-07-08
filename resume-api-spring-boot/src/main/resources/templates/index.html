@@ -14,7 +14,7 @@
 <div class="container my-2" style="font-family: monospace">
 
     <div class="container-xl">
-        <div class="row justify-content-md-center" >
+        <div class="row justify-content-md-center">
             <h1> Employees </h1>
         </div>
     </div>
@@ -52,7 +52,12 @@
         </tbody>
     </table>
 </div>
-
-
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <a class="page-link" th:href="@{'/employees?page=' + ${i-1}}">[[${i}]]</a>
+        </li>
+    </ul>
+</nav>
 </body>
 </html>
