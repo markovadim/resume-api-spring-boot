@@ -109,12 +109,15 @@ public class EmployeeController {
      * @param model   - model list for template
      * @return - template with search result
      */
-//    @GetMapping("/search")
-//    public String findEmployeesByKeyword(@RequestParam(required = false) String keyword,
-//                                         Model model) {
-//        List<Employee> people = employeeService.findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(keyword);
-//        model.addAttribute("people", people);
-//        model.addAttribute("keyword", keyword);
-//        return "search_result";
-//    }
+    @GetMapping("/search")
+    public String findEmployeesByKeyword(@PageableDefault(sort = {"name"}) Pageable pageable,
+                                         @RequestParam(required = false) String keyword,
+                                         Model model) {
+        List<Employee> people = employeeService.findEmployeeByKeyword(keyword);
+        model.addAttribute("people", people);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("totalElements", people.size());
+        model.addAttribute("totalPages", (people.size()/10)+1);
+        return "search_result";
+    }
 }

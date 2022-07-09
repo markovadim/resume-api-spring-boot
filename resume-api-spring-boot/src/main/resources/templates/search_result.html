@@ -15,7 +15,7 @@
 
     <div class="container-xl">
         <div class="row justify-content-md-center">
-            <h1> Search result: <a th:text="${keyword}"></a></h1>
+            <h1> <a th:text="${totalElements}"></a> results with keyword: <a th:text="${keyword}"></a></h1>
         </div>
     </div>
 
@@ -40,6 +40,14 @@
     </table>
     <a th:href="@{/employees}" class="btn btn-info col-12"> Back to Employee List</a>
 </div>
+
+<!--<nav aria-label="Page navigation example">-->
+<!--    <ul class="pagination justify-content-center">-->
+<!--        <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--            <a class="page-link" th:href="@{'/employees/search?page=' + ${i-1}}">[[${i}]]</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->
 
 </body>
 </html>

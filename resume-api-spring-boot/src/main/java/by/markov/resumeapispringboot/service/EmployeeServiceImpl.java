@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(currentEmployee);
     }
 
-//    public List<Employee> findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(String keyword) {
-//        return employeeRepository.findAll().stream().filter(e -> e.toString().contains(keyword)).collect(Collectors.toList());
-//    }
+    public List<Employee> findEmployeeByKeyword(String keyword) {
+        List<Employee> people = new ArrayList<>();
+        for (Employee employee : employeeRepository.findAll()) {
+            if (employee.toString().contains(keyword)) {
+                people.add(employee);
+            }
+        }
+        return people;
+    }
 }
