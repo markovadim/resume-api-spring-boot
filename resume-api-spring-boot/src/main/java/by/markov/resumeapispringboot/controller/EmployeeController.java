@@ -44,7 +44,7 @@ public class EmployeeController {
         model.addAttribute("totalPages", employeePage.getTotalPages());
         model.addAttribute("totalElements", employeePage.getTotalElements());
         model.addAttribute("content", employeePage.getContent());
-        return "index";
+        return "employees";
     }
 
     /**

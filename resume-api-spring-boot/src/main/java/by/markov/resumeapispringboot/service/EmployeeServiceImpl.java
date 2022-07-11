@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Implementation service interface
@@ -57,11 +56,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public List<Employee> findEmployeeByKeyword(String keyword) {
         List<Employee> people = new ArrayList<>();
-        for (Employee employee : employeeRepository.findAll()) {
-            if (employee.toString().contains(keyword)) {
-                people.add(employee);
-            }
-        }
+        employeeRepository.findAll().forEach(e -> {
+            if (e.toString().contains(keyword)){
+                people.add(e);
+            };
+        });
         return people;
     }
 }
