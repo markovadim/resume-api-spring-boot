@@ -6,6 +6,8 @@ import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Application service for CRUD operations
  *
@@ -14,15 +16,15 @@ import org.springframework.data.domain.Pageable;
  */
 
 public interface ResumeService {
-    Page<Resume> showResumeList(Pageable pageable) throws ResumeNotFoundException;
-
-    void additionResume(Resume resume) throws ResumeAlreadyExistException;
+    Page<Resume> findAll(Pageable pageable) throws ResumeNotFoundException;
 
     Resume findResumeById(Integer id) throws ResumeNotFoundException;
 
-    Resume deleteResume(Integer id) throws ResumeNotFoundException;
+    Resume addResume(Resume resume) throws ResumeAlreadyExistException;
+
+    void deleteResume(Integer id) throws ResumeNotFoundException;
 
     Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException;
 
-    Page<Resume> findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(String user, String location, String contacts, String experience, Pageable pageable);
+    List<Resume> findResumeByKeyword(String keyword);
 }

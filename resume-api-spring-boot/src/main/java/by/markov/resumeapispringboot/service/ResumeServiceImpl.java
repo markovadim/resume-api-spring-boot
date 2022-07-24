@@ -10,7 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementation service interface
@@ -23,60 +24,36 @@ import java.util.Optional;
 public class ResumeServiceImpl implements ResumeService {
     private final ResumeRepository resumeRepository;
 
-    public Page<Resume> showResumeList(Pageable pageable) throws ResumeNotFoundException {
-        Page<Resume> resumeIterable = resumeRepository.findAll(pageable);
-        if (resumeIterable.isEmpty()) {
-            throw new ResumeNotFoundException();
-        } else {
-            return resumeIterable;
-        }
+    public Page<Resume> findAll(Pageable pageable) throws ResumeNotFoundException {
+        return resumeRepository.findAll(pageable);
     }
 
-    public void additionResume(Resume resume) throws ResumeAlreadyExistException {
-        if (resumeRepository.findResumeByUser(resume.getUser()) != null) {
+    public Resume addResume(Resume resume) throws ResumeAlreadyExistException {
+        if (resumeRepository.findResumeByUser(resume.getUser()).isPresent()) {
             throw new ResumeAlreadyExistException();
-        } else {
-            resumeRepository.save(resume);
-        }
+        } else resumeRepository.saveAndFlush(resume);
+        return resume;
     }
 
     public Resume findResumeById(Integer id) throws ResumeNotFoundException {
-        Optional<Resume> resume = resumeRepository.findById(id);
-        if (resume.isEmpty()) {
-            throw new ResumeNotFoundException();
-        }
-        return resume.get();
+        return resumeRepository.findById(id).orElseThrow(ResumeNotFoundException::new);
     }
 
-    public Resume deleteResume(Integer id) throws ResumeNotFoundException {
-        Optional<Resume> resume = resumeRepository.findById(id);
-        if (resume.isEmpty()) {
-            throw new ResumeNotFoundException();
-        } else {
-            resumeRepository.delete(resume.get());
-        }
-        return resume.get();
+    public void deleteResume(Integer id) throws ResumeNotFoundException {
+        resumeRepository.delete(resumeRepository.findById(id).orElseThrow(ResumeNotFoundException::new));
     }
 
     public Resume updateResume(Integer id, Resume newResume) throws ResumeNotFoundException {
-        Optional<Resume> resumeInDataBase = resumeRepository.findById(id);
-        if (resumeInDataBase.isEmpty()) {
-            throw new ResumeNotFoundException();
-        } else {
-            resumeInDataBase.get().setUser(newResume.getUser());
-            resumeInDataBase.get().setLocation(newResume.getLocation());
-            resumeInDataBase.get().setExperience(newResume.getExperience());
-            resumeInDataBase.get().setContacts(newResume.getContacts());
-            resumeRepository.save(resumeInDataBase.get());
-        }
-        return resumeInDataBase.get();
+        Resume resumeInDataBase = resumeRepository.findById(id).orElseThrow(ResumeNotFoundException::new);
+        resumeInDataBase.setUser(newResume.getUser());
+        resumeInDataBase.setLocation(newResume.getLocation());
+        resumeInDataBase.setExperience(newResume.getExperience());
+        resumeInDataBase.setContacts(newResume.getContacts());
+        resumeRepository.save(resumeInDataBase);
+        return resumeInDataBase;
     }
 
-    public Page<Resume> findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(String user,
-                                                                                                         String location,
-                                                                                                         String contacts,
-                                                                                                         String experience,
-                                                                                                         Pageable pageable) {
-        return resumeRepository.findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(user, location, contacts, experience, pageable);
+    public List<Resume> findResumeByKeyword(String keyword) {
+        return resumeRepository.findAll().stream().filter(e -> e.toString().contains(keyword)).collect(Collectors.toList());
     }
 }

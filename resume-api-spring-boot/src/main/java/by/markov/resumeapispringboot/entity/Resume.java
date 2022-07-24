@@ -13,6 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor

@@ -5,14 +5,14 @@ import by.markov.resumeapispringboot.exceptions.ResumeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.ResumeNotFoundException;
 import by.markov.resumeapispringboot.service.ResumeServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Main controller for CRUD resume
@@ -27,8 +27,6 @@ public class ResumeController {
 
     private final ResumeServiceImpl resumeService;
 
-    private Resume resume;
-
     /**
      * Show all resumes from database
      *
@@ -36,31 +34,20 @@ public class ResumeController {
      * @return page with 5 employees
      */
     @GetMapping
-    public Page<Resume> showAllResumes(@PageableDefault(size = 5) Pageable pageable) {
-        Page<Resume> resumePage = null;
-        try {
-            resumePage = resumeService.showResumeList(pageable);
-            ResponseEntity.ok(resumePage);
-        } catch (ResumeNotFoundException e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return resumePage;
+    public Page<Resume> showAllResumes(@PageableDefault(size = 5) Pageable pageable) throws ResumeNotFoundException {
+        return resumeService.findAll(pageable);
     }
 
     /**
      * Create new resume
      *
      * @param resume - main object with fields (user, location, experience, contacts)
+     * @see ResumeAlreadyExistException
      * @see Resume
      */
     @PostMapping
-    public Resume createResume(@RequestBody Resume resume) {
-        try {
-            resumeService.additionResume(resume);
-            ResponseEntity.ok("Resume was saved");
-        } catch (ResumeAlreadyExistException e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public Resume createResume(@RequestBody Resume resume) throws ResumeAlreadyExistException {
+        resumeService.addResume(resume);
         return resume;
     }
 
@@ -68,15 +55,14 @@ public class ResumeController {
      * Remove resume by id
      *
      * @param id - id in database
+     * @return response entity with OK status
+     * @throws ResumeNotFoundException (if id not found)
+     * @see ResumeNotFoundException
      */
     @DeleteMapping("/{id}")
-    public Resume deleteResumeById(@PathVariable Integer id) {
-        try {
-            resume = resumeService.deleteResume(id);
-        } catch (ResumeNotFoundException e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return resume;
+    public ResponseEntity<?> deleteResumeById(@PathVariable Integer id) throws ResumeNotFoundException {
+        resumeService.deleteResume(id);
+        return ResponseEntity.ok().body("Resume Deleted");
     }
 
     /**
@@ -89,13 +75,8 @@ public class ResumeController {
      * @see ResumeNotFoundException
      */
     @PutMapping("/{id}")
-    public Resume updateResume(@PathVariable Integer id, @RequestBody Resume newResume) {
-        try {
-            resume = resumeService.updateResume(id, newResume);
-        } catch (ResumeNotFoundException e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return resume;
+    public Resume updateResume(@PathVariable Integer id, @RequestBody Resume newResume) throws ResumeNotFoundException {
+        return resumeService.updateResume(id, newResume);
     }
 
     /**
@@ -107,36 +88,18 @@ public class ResumeController {
      * @see ResumeNotFoundException
      */
     @GetMapping("/{id}")
-    public Resume findResumeById(@PathVariable Integer id) {
-        try {
-            resume = resumeService.findResumeById(id);
-        } catch (ResumeNotFoundException e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return resume;
+    public Resume findResumeById(@PathVariable Integer id) throws ResumeNotFoundException {
+        return resumeService.findResumeById(id);
     }
 
     /**
      * Search resume with user, location, experience or contacts
      *
-     * @param user       - username for search
-     * @param location   - location of employee
-     * @param contacts   - contacts of employee
-     * @param experience - experience
+     * @param keyword - keyword for search
      * @return - resume list
      */
-    @GetMapping("/")
-    public Page<Resume> findResumeByFieldOrField(@RequestParam(required = false) String location,
-                                                 @RequestParam(required = false) String contacts,
-                                                 @RequestParam(required = false) String experience,
-                                                 @RequestParam(required = false) String user,
-                                                 @PageableDefault(size = 4, sort = {"user"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        Page<Resume> resumeList = null;
-        try {
-            resumeList = resumeService.findResumeByUserContainsOrLocationContainsOrContactsContainsOrExperienceContains(user, location, contacts, experience, pageable);
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return resumeList;
+    @GetMapping("/search")
+    public List<Resume> findResumeByKeyword(@RequestParam(required = false) String keyword) {
+        return resumeService.findResumeByKeyword(keyword);
     }
 }
