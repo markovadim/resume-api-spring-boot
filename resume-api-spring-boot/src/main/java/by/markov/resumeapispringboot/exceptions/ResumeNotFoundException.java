@@ -6,9 +6,9 @@ package by.markov.resumeapispringboot.exceptions;
  * @author markov_vadim
  */
 
-public class EmployeeNotFoundException extends Exception {
+public class ResumeNotFoundException extends Exception {
 
-    public EmployeeNotFoundException() {
+    public ResumeNotFoundException() {
         super("Resume Not Found.");
     }
 }
