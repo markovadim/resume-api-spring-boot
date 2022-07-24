@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -30,39 +29,34 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeList;
     }
 
-    public Employee addEmployee(Employee employee) throws EmployeeAlreadyExistException {
+    public void addEmployee(Employee employee) throws EmployeeAlreadyExistException {
         if (employeeRepository.findEmployeeByEmail(employee.getEmail()) != null) {
             throw new EmployeeAlreadyExistException();
         }
         employeeRepository.save(employee);
-        return employee;
     }
 
     public Employee findEmployeeById(Integer id) throws EmployeeNotFoundException {
         return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public Employee deleteEmployee(Integer id) throws EmployeeNotFoundException {
-        Employee employee = employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
-        employeeRepository.delete(employee);
-        return employee;
+    public void deleteEmployee(Integer id) throws EmployeeNotFoundException {
+        employeeRepository.delete(employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new));
     }
 
-    public Employee updateEmployee(Integer id, Employee newEmployee) throws EmployeeNotFoundException {
-        Optional<Employee> resumeInDataBase = employeeRepository.findById(id);
-        if (resumeInDataBase.isEmpty()) {
-            throw new EmployeeNotFoundException();
-        } else {
-            resumeInDataBase.get().setName(newEmployee.getName());
-            resumeInDataBase.get().setAge(newEmployee.getAge());
-            resumeInDataBase.get().setLocation(newEmployee.getLocation());
-            resumeInDataBase.get().setEmail(newEmployee.getEmail());
-            employeeRepository.save(resumeInDataBase.get());
-        }
-        return resumeInDataBase.get();
+    public void updateEmployee(Integer id, Employee newEmployee) throws EmployeeNotFoundException {
+        Employee employee = employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+        employee.setName(newEmployee.getName());
+        employee.setAge(newEmployee.getAge());
+        employee.setLocation(newEmployee.getLocation());
+        employee.setEmail(newEmployee.getEmail());
+        employeeRepository.save(employee);
     }
 
     public List<Employee> findEmployeeByNameContainingOrAgeContainingOrLocationContainingOrEmailContaining(String keyword) {
-        return employeeRepository.findAll().stream().filter(e -> e.toString().contains(keyword)).collect(Collectors.toList());
+        return employeeRepository.findAll()
+                .stream()
+                .filter(e -> e.toString().contains(keyword))
+                .collect(Collectors.toList());
     }
 }

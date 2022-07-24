@@ -16,11 +16,11 @@ import java.util.List;
 public interface EmployeeService {
     List<Employee> findAll() throws EmployeeNotFoundException;
 
-    Employee addEmployee(Employee employee) throws EmployeeAlreadyExistException;
+    void addEmployee(Employee employee) throws EmployeeAlreadyExistException;
 
     Employee findEmployeeById(Integer id) throws EmployeeNotFoundException;
 
-    Employee deleteEmployee(Integer id) throws EmployeeNotFoundException;
+    void deleteEmployee(Integer id) throws EmployeeNotFoundException;
 
-    Employee updateEmployee(Integer id, Employee newEmployee) throws EmployeeNotFoundException;
+    void updateEmployee(Integer id, Employee newEmployee) throws EmployeeNotFoundException;
 }

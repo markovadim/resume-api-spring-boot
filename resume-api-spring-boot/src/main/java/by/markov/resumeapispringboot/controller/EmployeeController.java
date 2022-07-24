@@ -5,11 +5,8 @@ import by.markov.resumeapispringboot.exceptions.EmployeeAlreadyExistException;
 import by.markov.resumeapispringboot.exceptions.EmployeeNotFoundException;
 import by.markov.resumeapispringboot.service.EmployeeServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,8 +27,6 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeServiceImpl employeeService;
-
-    private Employee employee;
 
     /**
      * Show all employees from database
